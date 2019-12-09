@@ -33,6 +33,7 @@ sub ps_opera {
 $SPEC{pause_opera} = {
     v => 1.1,
     summary => "Pause (kill -STOP) Opera",
+    description => $App::BrowserUtils::desc_pause,
     args => {
        %App::BrowserUtils::args_common,
     },
