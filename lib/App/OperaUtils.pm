@@ -70,6 +70,26 @@ sub opera_is_paused {
     App::BrowserUtils::_do_browser('is_paused', 'opera', @_);
 }
 
+$SPEC{opera_is_running} = {
+    v => 1.1,
+    summary => "Check whether Opera is running",
+    description => <<'_',
+
+Opera is defined as running if there are some Opera processes that are *not*
+in 'stop' state. In other words, if Opera has been started but is currently
+paused, we do not say that it's running. If you want to check if Opera process
+exists, you can use `ps_opera`.
+
+_
+    args => {
+        %App::BrowserUtils::args_common,
+        %App::BrowserUtils::argopt_quiet,
+    },
+};
+sub opera_is_running {
+    App::BrowserUtils::_do_browser('is_running', 'opera', @_);
+}
+
 $SPEC{terminate_opera} = {
     v => 1.1,
     summary => "Terminate  (kill -KILL) Opera",
