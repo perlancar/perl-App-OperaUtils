@@ -1,3 +1,8 @@
+0.005   2020-06-13  Released-By: PERLANCAR; Urgency: medium
+
+	- Add utilities: start-opera, restart-opera, opera-has-processes.
+
+
 0.004   2020-04-19  Released-By: PERLANCAR; Urgency: medium
 
 	- Add CLI: opera-is-running.
