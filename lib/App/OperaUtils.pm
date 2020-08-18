@@ -53,6 +53,18 @@ sub unpause_opera {
     App::BrowserUtils::_do_browser('unpause', 'opera', @_);
 }
 
+$SPEC{opera_has_processes} = {
+    v => 1.1,
+    summary => "Check whether Opera has processes",
+    args => {
+        %App::BrowserUtils::args_common,
+        %App::BrowserUtils::argopt_quiet,
+    },
+};
+sub opera_has_processes {
+    App::BrowserUtils::_do_browser('has_processes', 'opera', @_);
+}
+
 $SPEC{opera_is_paused} = {
     v => 1.1,
     summary => "Check whether Opera is paused",
@@ -70,6 +82,26 @@ sub opera_is_paused {
     App::BrowserUtils::_do_browser('is_paused', 'opera', @_);
 }
 
+$SPEC{opera_is_running} = {
+    v => 1.1,
+    summary => "Check whether Opera is running",
+    description => <<'_',
+
+Opera is defined as running if there are some Opera processes that are *not*
+in 'stop' state. In other words, if Opera has been started but is currently
+paused, we do not say that it's running. If you want to check if Opera process
+exists, you can use `ps_opera`.
+
+_
+    args => {
+        %App::BrowserUtils::args_common,
+        %App::BrowserUtils::argopt_quiet,
+    },
+};
+sub opera_is_running {
+    App::BrowserUtils::_do_browser('is_running', 'opera', @_);
+}
+
 $SPEC{terminate_opera} = {
     v => 1.1,
     summary => "Terminate  (kill -KILL) Opera",
@@ -79,6 +111,36 @@ $SPEC{terminate_opera} = {
 };
 sub terminate_opera {
     App::BrowserUtils::_do_browser('terminate', 'opera', @_);
+}
+
+$SPEC{restart_opera} = {
+    v => 1.1,
+    summary => "Restart opera",
+    args => {
+        %App::BrowserUtils::argopt_opera_cmd,
+        %App::BrowserUtils::argopt_quiet,
+    },
+    features => {
+        dry_run => 1,
+    },
+};
+sub restart_opera {
+    App::BrowserUtils::restart_browsers(@_, restart_opera=>1);
+}
+
+$SPEC{start_opera} = {
+    v => 1.1,
+    summary => "Start opera if not already started",
+    args => {
+        %App::BrowserUtils::argopt_opera_cmd,
+        %App::BrowserUtils::argopt_quiet,
+    },
+    features => {
+        dry_run => 1,
+    },
+};
+sub start_opera {
+    App::BrowserUtils::start_browsers(@_, start_opera=>1);
 }
 
 1;
